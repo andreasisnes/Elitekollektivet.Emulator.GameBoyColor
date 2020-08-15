@@ -1,3 +1,5 @@
+using Elitekollektivet.Emulator.GameBoyColor.Interfaces;
+
 namespace Elitekollektivet.Emulator.GameBoyColor.Processor
 {
     public partial class ProcessorComponent
@@ -33,5 +35,24 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Processor
         public byte IME { get; set; }
 
         private const byte OneCycle = 1;
+
+        private const byte TwoCycle = 2;
+
+        private const byte ThreeCycle = 3;
+
+        private const byte FourCycle = 4;
+
+        private const byte FiveCycle = 5;
+
+        private readonly IMemory _memory;
+
+        public ProcessorComponent() : this(new MemoryComponent())
+        {
+        }
+
+        public ProcessorComponent(IMemory memory)
+        {
+            _memory = memory;
+        }
     }
 }
