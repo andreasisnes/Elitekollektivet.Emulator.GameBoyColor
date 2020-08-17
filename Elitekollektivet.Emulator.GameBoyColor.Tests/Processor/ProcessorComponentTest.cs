@@ -8,7 +8,7 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
 {
     public class ProcessorComponentTestData
     {
-        private static readonly int _testDataLength = 2;
+        private static readonly int _testDataLength = 1;
 
         private static readonly Random _randomizer = new Random();
 
@@ -16,7 +16,23 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         {
             return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
             {
-                (byte) _randomizer.Next(0, 0xFE)
+                (byte) _randomizer.Next(0, 0xFF)
+            });
+        }
+
+        public static IEnumerable<object[]> GenerateTwoRandomBytes()
+        {
+            return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
+            {
+                (byte) _randomizer.Next(0, 0xFF), (byte) _randomizer.Next(0, 0xFF) 
+            });
+        }
+
+        public static IEnumerable<object[]> GenerateThreeRandomBytes()
+        {
+            return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
+            {
+                (byte) _randomizer.Next(0, 0xFF), (byte) _randomizer.Next(0, 0xFF), (byte) _randomizer.Next(0, 0xFF)
             });
         }
     }
@@ -49,6 +65,16 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
             Assert.Equal(0, _processor.R);
             Assert.Equal(0, _processor.SP);
             Assert.Equal(0, _processor.T);
+        }
+
+        [Theory(DisplayName="Processor_HL_RegisterConcat")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void Processor_HL_RegisterConcat(byte H, byte L)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            Assert.Equal((H << 8) + L, _processor.HL);
         }
     }
 }

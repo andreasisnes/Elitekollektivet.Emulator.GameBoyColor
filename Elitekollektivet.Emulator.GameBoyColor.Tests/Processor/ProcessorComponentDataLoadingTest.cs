@@ -3,11 +3,11 @@ using Xunit;
 
 namespace Elitekollektivet.Emulator.GameBoyColor.Tests
 {
-    public class ProcessorComponentLoadDataTestRegisterA
+    public class ProcessorComponentDataLoadingTestRegisterA
     {
         private readonly ProcessorComponent _processor;
 
-        public ProcessorComponentLoadDataTestRegisterA()
+        public ProcessorComponentDataLoadingTestRegisterA()
         {
             _processor = new ProcessorComponent();
         }
@@ -83,11 +83,11 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         }
     }
 
-    public class ProcessorComponentLoadDataTestRegisterB
+    public class ProcessorComponentDataLoadingTestRegisterB
     {
         private readonly ProcessorComponent _processor;
 
-        public ProcessorComponentLoadDataTestRegisterB()
+        public ProcessorComponentDataLoadingTestRegisterB()
         {
             _processor = new ProcessorComponent();
         }
@@ -163,11 +163,11 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         }
     }
 
-    public class ProcessorComponentLoadDataTestRegisterC
+    public class ProcessorComponentDataLoadingTestRegisterC
     {
         private readonly ProcessorComponent _processor;
 
-        public ProcessorComponentLoadDataTestRegisterC()
+        public ProcessorComponentDataLoadingTestRegisterC()
         {
             _processor = new ProcessorComponent();
         }
@@ -243,11 +243,11 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         }
     }
 
-    public class ProcessorComponentLoadDataTestRegisterD
+    public class ProcessorComponentDataLoadingTestRegisterD
     {
         private readonly ProcessorComponent _processor;
 
-        public ProcessorComponentLoadDataTestRegisterD()
+        public ProcessorComponentDataLoadingTestRegisterD()
         {
             _processor = new ProcessorComponent();
         }
@@ -323,11 +323,11 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         }
     }
 
-    public class ProcessorComponentLoadDataTestRegisterE
+    public class ProcessorComponentDataLoadingTestRegisterE
     {
         private readonly ProcessorComponent _processor;
 
-        public ProcessorComponentLoadDataTestRegisterE()
+        public ProcessorComponentDataLoadingTestRegisterE()
         {
             _processor = new ProcessorComponent();
         }
@@ -403,11 +403,11 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         }
     }
 
-    public class ProcessorComponentLoadDataTestRegisterH
+    public class ProcessorComponentDataLoadingTestRegisterH
     {
         private readonly ProcessorComponent _processor;
 
-        public ProcessorComponentLoadDataTestRegisterH()
+        public ProcessorComponentDataLoadingTestRegisterH()
         {
             _processor = new ProcessorComponent();
         }
@@ -483,11 +483,11 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         }
     }
 
-    public class ProcessorComponentLoadDataTestRegisterL
+    public class ProcessorComponentDataLoadingTestRegisterL
     {
         private readonly ProcessorComponent _processor;
 
-        public ProcessorComponentLoadDataTestRegisterL()
+        public ProcessorComponentDataLoadingTestRegisterL()
         {
             _processor = new ProcessorComponent();
         }
@@ -560,6 +560,220 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
             _processor.L = l;
             _processor.LDrrLL();
             Assert.Equal(l, _processor.L);
+        }
+    }
+
+    public class ProcessorComponentDataLoadingTestMemoryToRegisterHl
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestMemoryToRegisterHl()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDrmHLA_ReadByte_AEqualReadByteOfHl")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrmHLA_ReadByte_AEqualReadByteOfHl(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.Memory.WriteByte(_processor.HL, data);
+
+            _processor.LDrmHLA();
+
+            Assert.Equal(_processor.A, data);
+        }
+
+        [Theory(DisplayName="LDrmHLB_ReadByte_BEqualReadByteOfHl")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrmHLB_ReadByte_BEqualReadByteOfHl(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.Memory.WriteByte(_processor.HL, data);
+
+            _processor.LDrmHLB();
+
+            Assert.Equal(_processor.B, data);
+        }
+
+        [Theory(DisplayName="LDrmHLC_ReadByte_CEqualReadByteOfHl")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrmHLC_ReadByte_CEqualReadByteOfHl(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.Memory.WriteByte(_processor.HL, data);
+
+            _processor.LDrmHLC();
+
+            Assert.Equal(_processor.C, data);
+        }
+
+        [Theory(DisplayName="LDrmHLD_ReadByte_DEqualReadByteOfHl")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrmHLD_ReadByte_DEqualReadByteOfHl(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.Memory.WriteByte(_processor.HL, data);
+
+            _processor.LDrmHLD();
+
+            Assert.Equal(_processor.D, data);
+        }
+
+        [Theory(DisplayName="LDrmHLE_ReadByte_EEqualReadByteOfHl")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrmHLE_ReadByte_EEqualReadByteOfHl(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.Memory.WriteByte(_processor.HL, data);
+
+            _processor.LDrmHLE();
+
+            Assert.Equal(_processor.E, data);
+        }
+
+        [Theory(DisplayName="LDrmHLH_ReadByte_HEqualReadByteOfHl")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrmHLH_ReadByte_HEqualReadByteOfHl(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.Memory.WriteByte(_processor.HL, data);
+
+            _processor.LDrmHLH();
+
+            Assert.Equal(_processor.H, data);
+        }
+
+        [Theory(DisplayName="LDrmHLL_ReadByte_LEqualReadByteOfHl")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrmHLL_ReadByte_LEqualReadByteOfHl(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.Memory.WriteByte(_processor.HL, data);
+
+            _processor.LDrmHLL();
+
+            Assert.Equal(_processor.L, data);
+        }
+    }
+
+    public class ProcessorComponentDataLoadingTestRegisterToMemoryHL
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestRegisterToMemoryHL()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDmrHLA_WriteByte_RegisterAToMemoryHL")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDmrHLA_WriteByte_RegisterAToMemoryHL(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.A = data;
+
+            _processor.LDmrHLA();
+
+            Assert.Equal(data, _processor.Memory.ReadByte(_processor.HL));
+        }
+
+        [Theory(DisplayName="LDmrHLB_WriteByte_RegisterBToMemoryHL")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDmrHLB_WriteByte_RegisterBToMemoryHL(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.B = data;
+
+            _processor.LDmrHLB();
+
+            Assert.Equal(data, _processor.Memory.ReadByte(_processor.HL));
+        }
+
+        [Theory(DisplayName="LDmrHLC_WriteByte_RegisterCToMemoryHL")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDmrHLC_WriteByte_RegisterCToMemoryHL(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.C = data;
+
+            _processor.LDmrHLC();
+
+            Assert.Equal(data, _processor.Memory.ReadByte(_processor.HL));
+        }
+
+        [Theory(DisplayName="LDmrHLD_WriteByte_RegisterDToMemoryHL")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDmrHLD_WriteByte_RegisterDToMemoryHL(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.D = data;
+
+            _processor.LDmrHLD();
+
+            Assert.Equal(data, _processor.Memory.ReadByte(_processor.HL));
+        }
+
+        [Theory(DisplayName="LDmrHLE_WriteByte_RegisterEToMemoryHL")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDmrHLE_WriteByte_RegisterEToMemoryHL(byte H, byte L, byte data)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.E = data;
+
+            _processor.LDmrHLE();
+
+            Assert.Equal(data, _processor.Memory.ReadByte(_processor.HL));
+        }
+
+        [Theory(DisplayName="LDmrHLH_WriteByte_RegisterHToMemoryHL")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDmrHLH_WriteByte_RegisterHToMemoryHL(byte H, byte L)
+        {
+            _processor.H = H;
+            _processor.L = L;
+
+            _processor.LDmrHLH();
+
+            Assert.Equal(H, _processor.Memory.ReadByte(_processor.HL));
+        }
+
+        [Theory(DisplayName="LDmrHLL_WriteByte_RegisterLToMemoryHL")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDmrHLL_WriteByte_RegisterLToMemoryHL(byte H, byte L)
+        {
+            _processor.H = H;
+            _processor.L = L;
+
+            _processor.LDmrHLL();
+
+            Assert.Equal(L, _processor.Memory.ReadByte(_processor.HL));
         }
     }
 }

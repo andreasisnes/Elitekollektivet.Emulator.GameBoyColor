@@ -4,6 +4,25 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Processor
 {
     public partial class ProcessorComponent
     {
+        private const byte OneCycle = 1;
+
+        private const byte TwoCycle = 2;
+
+        private const byte ThreeCycle = 3;
+
+        private const byte FourCycle = 4;
+
+        private const byte FiveCycle = 5;
+
+        public ProcessorComponent() : this(new MemoryComponent())
+        {
+        }
+
+        public ProcessorComponent(IMemory memory)
+        {
+            Memory = memory;
+        }
+
         public byte A { get; set; }
 
         public byte B { get; set; }
@@ -24,6 +43,8 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Processor
 
         public ushort PC { get; set; }
 
+        public ushort HL { get { return (ushort) ((H << 8) + L); }}
+
         public byte I { get; set; }
 
         public byte R { get; set; }
@@ -34,25 +55,7 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Processor
 
         public byte IME { get; set; }
 
-        private const byte OneCycle = 1;
+        public IMemory Memory { get; }
 
-        private const byte TwoCycle = 2;
-
-        private const byte ThreeCycle = 3;
-
-        private const byte FourCycle = 4;
-
-        private const byte FiveCycle = 5;
-
-        private readonly IMemory _memory;
-
-        public ProcessorComponent() : this(new MemoryComponent())
-        {
-        }
-
-        public ProcessorComponent(IMemory memory)
-        {
-            _memory = memory;
-        }
     }
 }

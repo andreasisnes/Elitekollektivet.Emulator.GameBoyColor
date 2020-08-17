@@ -16,7 +16,7 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         {
             return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
             {
-                (ushort) _randomizer.Next(0, 0xFFFE), (byte) _randomizer.Next(1, 0xFE)
+                (ushort) _randomizer.Next(0, 0xFFFF), (byte) _randomizer.Next(0, 0xFF)
             });
         }
 
@@ -24,7 +24,7 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
         {
             return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
             {
-                (ushort) _randomizer.Next(0, 0xFFFE), (byte) _randomizer.Next(1, 0xFE), (byte) _randomizer.Next(1, 0xFE)
+                (ushort) _randomizer.Next(0, 0xFFFF), (byte) _randomizer.Next(0, 0xFF), (byte) _randomizer.Next(0, 0xFF)
             });
         }
     }
