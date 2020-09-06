@@ -776,4 +776,336 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
             Assert.Equal(L, _processor.Memory.ReadByte(_processor.HL));
         }
     }
+
+    public class ProcessorComponentDataLoadingTestMemoryToRegisterIncrementSP
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestMemoryToRegisterIncrementSP()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDrnA_ReadByteFrom_MemoryToRegisterAIncrementStackPointer")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateByteAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrnA_ReadByteFrom_MemoryToRegisterAIncrementStackPointer(byte A, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC, A);
+
+            _processor.LDrnA();
+
+            Assert.Equal(_processor.A, A);
+            Assert.Equal(_processor.PC, ++PC);
+        }
+
+        [Theory(DisplayName="LDrnB_ReadByteFrom_MemoryToRegisterBIncrementStackPointer")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateByteAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrnB_ReadByteFrom_MemoryToRegisterBIncrementStackPointer(byte B, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC, B);
+
+            _processor.LDrnB();
+
+            Assert.Equal(_processor.B, B);
+            Assert.Equal(_processor.PC, ++PC);
+        }
+
+        [Theory(DisplayName="LDrnC_ReadByteFrom_MemoryToRegisterCIncrementStackPointer")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateByteAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrnC_ReadByteFrom_MemoryToRegisterCIncrementStackPointer(byte C, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC, C);
+
+            _processor.LDrnC();
+
+            Assert.Equal(_processor.C, C);
+            Assert.Equal(_processor.PC, ++PC);
+        }
+
+        [Theory(DisplayName="LDrnD_ReadByteFrom_MemoryToRegisterDIncrementStackPointer")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateByteAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrnD_ReadByteFrom_MemoryToRegisterDIncrementStackPointer(byte D, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC, D);
+
+            _processor.LDrnD();
+
+            Assert.Equal(_processor.D, D);
+            Assert.Equal(_processor.PC, ++PC);
+        }
+
+        [Theory(DisplayName="LDrnE_ReadByteFrom_MemoryToRegisterEIncrementStackPointer")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateByteAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrnE_ReadByteFrom_MemoryToRegisterEIncrementStackPointer(byte E, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC, E);
+
+            _processor.LDrnE();
+
+            Assert.Equal(_processor.E, E);
+            Assert.Equal(_processor.PC, ++PC);
+        }
+
+        [Theory(DisplayName="LDrnH_ReadByteFrom_MemoryToRegisterHIncrementStackPointer")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateByteAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrnH_ReadByteFrom_MemoryToRegisterHIncrementStackPointer(byte H, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC, H);
+
+            _processor.LDrnH();
+
+            Assert.Equal(_processor.H, H);
+            Assert.Equal(_processor.PC, ++PC);
+        }
+
+        [Theory(DisplayName="LDrnL_ReadByteFrom_MemoryToRegisterLIncrementStackPointer")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateByteAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDrnL_ReadByteFrom_MemoryToRegisterLIncrementStackPointer(byte L, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC, L);
+
+            _processor.LDrnL();
+
+            Assert.Equal(_processor.L, L);
+            Assert.Equal(_processor.PC, ++PC);
+        }
+    }
+
+    public class ProcessorComponentDataLoadingTestWriteReadMemoryAndIncrementSp
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestWriteReadMemoryAndIncrementSp()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDHLmn_ReadAndWriteByte_WriteHReadSPIncrementPC")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoBytesAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDHLmn_ReadAndWriteByte_WriteHReadSPIncrementPC(byte H, byte L, ushort PC)
+        {
+            _processor.H = H;
+            _processor.L = L;
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(_processor.PC, H);
+
+            _processor.LDHLmn();
+
+            Assert.Equal(_processor.Memory.ReadByte(_processor.HL), H);
+            Assert.Equal(_processor.PC, ++PC);
+        }
+    }
+
+    public class ProcessorComponentDataLoadingTestWriteFromTwoRegisters
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestWriteFromTwoRegisters()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDBCmA_WriteByte_RegisterBCValueA")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDBCmA_WriteByte_RegisterBCValueA(byte B, byte C, byte A)
+        {
+            _processor.B = B;
+            _processor.C = C;
+            _processor.A = A;
+
+            _processor.LDBCmA();
+
+            Assert.Equal(_processor.Memory.ReadByte((_processor.B << 8) + _processor.C), _processor.A);
+        }
+
+        [Theory(DisplayName="LDDEmA_WriteByte_RegisterDEValueA")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDDEmA_WriteByte_RegisterDEValueA(byte D, byte E, byte A)
+        {
+            _processor.D = D;
+            _processor.E = E;
+            _processor.A = A;
+
+            _processor.LDDEmA();
+
+            Assert.Equal(_processor.Memory.ReadByte((_processor.D << 8) + _processor.E), _processor.A);
+        }
+    }
+
+    public class ProcessorComponentDataLoadingTestWriteAddressSPValueRegisterA
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestWriteAddressSPValueRegisterA()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDmmA_WriteByte_AddressRegisterSpValueRegisterA")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateBytesAndTwoWords), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDmmA_WriteByte_AddressRegisterSpValueRegisterA(byte A, ushort addr, ushort PC)
+        {
+            _processor.A = A;
+            _processor.PC = PC;
+            _processor.Memory.WriteWord(_processor.PC, addr);
+
+            _processor.LDmmA();
+
+            Assert.Equal(_processor.Memory.ReadByte(addr), _processor.A);
+            Assert.Equal(_processor.PC, (ushort) (PC + 2));
+        }
+    }
+
+    public class ProcessorComponentDataLoadingTestReadMemoryFromTwoRegisters
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestReadMemoryFromTwoRegisters()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDABCm_ReadByte_AddressRegisterBCToRegisterA")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDABCm_ReadByte_AddressRegisterBCToRegisterA(byte data, byte B, byte C)
+        {
+            _processor.B = B;
+            _processor.C = C;
+            _processor.Memory.WriteWord((B << 8) + C, data);
+
+            _processor.LDABCm();
+
+            Assert.Equal(data, _processor.A);
+        }
+
+        [Theory(DisplayName="LDADEm_ReadByte_AddressRegisterDEToRegisterA")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateThreeRandomBytes), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDADEm_ReadByte_AddressRegisterDEToRegisterA(byte data, byte D, byte E)
+        {
+            _processor.D = D;
+            _processor.E = E;
+            _processor.Memory.WriteWord((D << 8) + E, data);
+
+            _processor.LDADEm();
+
+            Assert.Equal(data, _processor.A);
+        }
+    }
+
+    public class ProcessorComponentDataLoadingTestReadByteFromAddressRegisterSp
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestReadByteFromAddressRegisterSp()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDAmm_ReadByte_ReadByteFromAddressRegisterPCToRegisterA")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoBytesAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDAmm_ReadByte_ReadByteFromAddressRegisterPCToRegisterA(byte addr, byte data, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteWord(PC, addr);
+            _processor.Memory.WriteWord(addr, data);
+
+            _processor.LDAmm();
+
+            Assert.Equal(data, _processor.A);
+            Assert.Equal(PC, _processor.PC - 2);
+        }
+    }
+
+    public class ProcessorComponentDataLoadingTestReadWordFromAddressRegisterPCToTwoRegisters
+    {
+        private readonly ProcessorComponent _processor;
+
+        public ProcessorComponentDataLoadingTestReadWordFromAddressRegisterPCToTwoRegisters()
+        {
+            _processor = new ProcessorComponent();
+        }
+
+        [Theory(DisplayName="LDBCnn_ReadByte_ReadByteFromAddressRegisterPCToRegistersBC")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoBytesAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDBCnn_ReadByte_ReadByteFromAddressRegisterPCToRegistersBC(byte dataB, byte dataC, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC + 1, dataB);
+            _processor.Memory.WriteByte(PC, dataC);
+
+            _processor.LDBCnn();
+
+            Assert.Equal(dataC, _processor.C);
+            Assert.Equal(dataB, _processor.B);
+            Assert.Equal(PC + 2, _processor.PC);
+        }
+
+        [Theory(DisplayName="LDDEnn_ReadByte_ReadByteFromAddressRegisterPCToRegistersDE")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoBytesAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDDEnn_ReadByte_ReadByteFromAddressRegisterPCToRegistersDE(byte dataD, byte dataE, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC + 1, dataD);
+            _processor.Memory.WriteByte(PC, dataE);
+
+            _processor.LDDEnn();
+
+            Assert.Equal(dataD, _processor.D);
+            Assert.Equal(dataE, _processor.E);
+            Assert.Equal(PC + 2, _processor.PC);
+        }
+
+        [Theory(DisplayName="LDHLnn_ReadByte_ReadByteFromAddressRegisterPCToRegistersHL")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoBytesAndWord), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDHLnn_ReadByte_ReadByteFromAddressRegisterPCToRegistersHL(byte dataH, byte dataL, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteByte(PC + 1, dataH);
+            _processor.Memory.WriteByte(PC, dataL);
+
+            _processor.LDHLnn();
+
+            Assert.Equal(dataH, _processor.H);
+            Assert.Equal(dataL, _processor.L);
+            Assert.Equal(PC + 2, _processor.PC);
+        }
+
+        [Theory(DisplayName="LDSPnn_ReadByte_ReadByteFromAddressRegisterPCToRegistersSP")]
+        [Trait("Category", "Unit")]
+        [MemberData(nameof(ProcessorComponentTestData.GenerateTwoWords), MemberType= typeof(ProcessorComponentTestData))]
+        public void LDSPnn_ReadByte_ReadByteFromAddressRegisterPCToRegistersSP(ushort data, ushort PC)
+        {
+            _processor.PC = PC;
+            _processor.Memory.WriteWord(PC, data);
+
+            _processor.LDSPnn();
+
+            Assert.Equal(data, _processor.SP);
+            Assert.Equal(PC + 2, _processor.PC);
+        }
+    }
 }

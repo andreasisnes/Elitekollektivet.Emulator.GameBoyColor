@@ -137,19 +137,19 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Processor
         public void LDmrHLL() { Memory.WriteByte(HL, L); M=TwoCycle; }
 
 
-        public void LDrn_A() { A=Memory.ReadByte(PC); PC++; M=TwoCycle; }
+        public void LDrnA() { A=Memory.ReadByte(PC); PC++; M=TwoCycle; }
 
-        public void LDrn_B() { B=Memory.ReadByte(PC); PC++; M=TwoCycle; }
+        public void LDrnB() { B=Memory.ReadByte(PC); PC++; M=TwoCycle; }
 
-        public void LDrn_C() { C=Memory.ReadByte(PC); PC++; M=TwoCycle; }
+        public void LDrnC() { C=Memory.ReadByte(PC); PC++; M=TwoCycle; }
 
-        public void LDrn_D() { D=Memory.ReadByte(PC); PC++; M=TwoCycle; }
+        public void LDrnD() { D=Memory.ReadByte(PC); PC++; M=TwoCycle; }
 
-        public void LDrn_E() { E=Memory.ReadByte(PC); PC++; M=TwoCycle; }
+        public void LDrnE() { E=Memory.ReadByte(PC); PC++; M=TwoCycle; }
 
-        public void LDrn_H() { H=Memory.ReadByte(PC); PC++; M=TwoCycle; }
+        public void LDrnH() { H=Memory.ReadByte(PC); PC++; M=TwoCycle; }
 
-        public void LDrn_L() { L=Memory.ReadByte(PC); PC++; M=TwoCycle; }
+        public void LDrnL() { L=Memory.ReadByte(PC); PC++; M=TwoCycle; }
 
 
         public void LDHLmn() { Memory.WriteByte(HL, Memory.ReadByte(PC)); PC++; M=ThreeCycle; }
@@ -169,6 +169,7 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Processor
 
 
         public void LDAmm() { A=Memory.ReadByte(Memory.ReadWord(PC)); PC+=2; M=FourCycle; }
+
 
         public void LDBCnn() { C=Memory.ReadByte(PC); B=Memory.ReadByte(PC+1); PC+=2; M=ThreeCycle; }
 

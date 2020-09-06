@@ -1,7 +1,7 @@
 
 ## How To
 * [How To Write a Computer Emulator](http://fms.komkon.org/EMUL8/HOWTO.html)
-* [Imran Nazar - GameBoy Emulation in JavaScript](http://imrannazar.com/GameBoy-Emulation-in-JavaScript:-The-Processor)
+* [Imran Nazar - GameBoy Emulation in JavaScript](http://imrannazar.com/GameBoy-Emulation-in-JavaScript:-The-CPU)
 * [GBATEK](https://problemkaputt.de/gbatek.htm)
 * [Writing a Game Boy emulator, Cinoop](https://cturt.github.io/cinoop.html)
 

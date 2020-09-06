@@ -4,15 +4,15 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Processor
 {
     public partial class ProcessorComponent
     {
-        private const byte OneCycle = 1;
+        public const byte OneCycle = 1;
 
-        private const byte TwoCycle = 2;
+        public const byte TwoCycle = 2;
 
-        private const byte ThreeCycle = 3;
+        public const byte ThreeCycle = 3;
 
-        private const byte FourCycle = 4;
+        public const byte FourCycle = 4;
 
-        private const byte FiveCycle = 5;
+        public const byte FiveCycle = 5;
 
         public ProcessorComponent() : this(new MemoryComponent())
         {

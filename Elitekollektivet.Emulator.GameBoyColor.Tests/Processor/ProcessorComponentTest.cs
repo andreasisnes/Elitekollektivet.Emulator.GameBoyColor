@@ -35,6 +35,38 @@ namespace Elitekollektivet.Emulator.GameBoyColor.Tests
                 (byte) _randomizer.Next(0, 0xFF), (byte) _randomizer.Next(0, 0xFF), (byte) _randomizer.Next(0, 0xFF)
             });
         }
+
+        public static IEnumerable<object[]> GenerateByteAndWord()
+        {
+            return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
+            {
+                (byte) _randomizer.Next(0, 0xFF), (ushort) _randomizer.Next(0, 0xFFFF)
+            });
+        }
+
+        public static IEnumerable<object[]> GenerateTwoBytesAndWord()
+        {
+            return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
+            {
+                (byte) _randomizer.Next(0, 0xFF), (byte) _randomizer.Next(0, 0xFF), (ushort) _randomizer.Next(0, 0xFFFF)
+            });
+        }
+
+        public static IEnumerable<object[]> GenerateBytesAndTwoWords()
+        {
+            return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
+            {
+                (byte) _randomizer.Next(0, 0xFF), (ushort) _randomizer.Next(0, 0xFFFF), (ushort) _randomizer.Next(0, 0xFFFF)
+            });
+        }
+
+        public static IEnumerable<object[]> GenerateTwoWords()
+        {
+            return Enumerable.Range(0, _testDataLength).Select(_ => new object[]
+            {
+                (ushort) _randomizer.Next(0, 0xFFFF), (ushort) _randomizer.Next(0, 0xFFFF)
+            });
+        }
     }
 
     public class ProcessorComponentTest
